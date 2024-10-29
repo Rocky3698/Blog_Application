@@ -3,10 +3,39 @@
 
 {% block content %}
 
-<h1>{{ post.title }}</h1>
-<p class="date">
+<div class="space-y-4">
+    <h1 class="text-4xl">{{ post.title }}</h1>
+<p class="text-sm opacity-80">
     Published {{ post.publish }} by {{ post.author }}
 </p>
-{{ post.body|linebreaks }}
-
+<p class="text-lg">{{ post.body|linebreaks }}</p>
+<div>
+    <hr>
+<div class="flex items-center justify-between">
+    <p class="underline ">
+        <a href="{% url "blog:post_share" post.id %}">
+            Share this post
+        </a>
+    </p>
+    <p>{% with comments.count as total_comments %}</p>
+    <h2>
+        {{ total_comments }} comment{{ total_comments|pluralize }}
+    </h2>
+</div>
+<hr>
+</div>
+{% endwith %}
+{% for comment in comments %}
+<div class="border">
+    <p class="info">
+        Comment {{ forloop.counter }} by {{ comment.name }}
+        {{ comment.created }}
+    </p>
+    {{ comment.body|linebreaks }}
+</div>
+{% empty %}
+<p>There are no comments.</p>
+{% endfor %}
+{% include "blog/post/includes/comment_form.html" %}
+</div>
 {% endblock %}

@@ -3,18 +3,19 @@
 <html lang="en">
 
 <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock %}</title>
 </head>
 
-<body>
+<body class="flex justify-around max-w-7xl mx-auto">
     <div id="content">
         {% block content %}
         {% endblock %}
     </div>
-    <div id="sidebar">
-        <h2>My blog</h2>
+    <div id="sidebar" class="">
+        <h2 class="text-3xl">My blog</h2>
         <p>This is my blog.</p>
     </div>
 </body>
-
-</html>
